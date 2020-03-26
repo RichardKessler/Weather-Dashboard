@@ -1,6 +1,6 @@
 const myAPIKey = 'f3a53b113ee3edc1f98df25664c9486a';
+// var myCity = $('#cityInput').val();
 
-var myCurrentCityURL = 'https://api.openweathermap.org/data/2.5/weather?q=San+Francisco&appid=f3a53b113ee3edc1f98df25664c9486a'
 
 var myCityURL5 = 'https://api.openweathermap.org/data/2.5/forecast?q=San+Francisco&appid=f3a53b113ee3edc1f98df25664c9486a';
 
@@ -8,17 +8,34 @@ var uvIndex = 'https://api.openweathermap.org/data/2.5/uvi?appid=f3a53b113ee3edc
 
 var myWeatherData = ['', '', '', ];
 
-$.get(myCurrentCityURL, function(response) {
+$(".btn").click(function(event) {
+    var myCity = $("#cityInput").val();
+    console.log("myCity", myCity);
 
-    var tempF = (response.main.temp - 273.15) * 1.80 + 32;
+    var myCurrentCityURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + myCity + '&appid=f3a53b113ee3edc1f98df25664c9486a';
+    event.preventDefault();
 
-    $("#city").html("<h1> City: " + response.name + "</h1>");
-    $("#condition").html("<h2> Condition: " + response.weather[0].description + "</h2>");
-    $("#temp").html("<h2> Temp: " + tempF.toFixed(2) + " F</h2>");
-    $("#humidity").html("<h2> Humidity: " + response.main.humidity + "</h2>");
-    $("#windSpeed").html("<h2> Wind Speed: " + response.wind.speed + "</h2>");
-    console.log(response);
+    $.ajax({
+            url: myCurrentCityURL,
+            method: 'GET'
+        })
+        .then(function(response) {
+
+            var tempF = (response.main.temp - 273.15) * 1.80 + 32;
+
+            $("#city").html("<h1> City: " + response.name + "</h1>");
+            $("#condition").html("<h2> Condition: " + response.weather[0].description + "</h2>");
+            $("#temp").html("<h2> Temp: " + tempF.toFixed(2) + " F</h2>");
+            $("#humidity").html("<h2> Humidity: " + response.main.humidity + "</h2>");
+            $("#windSpeed").html("<h2> Wind Speed: " + response.wind.speed + "</h2>");
+            console.log(response);
+        })
 })
+
+
+// $.get(myCurrentCityURL, function(response) {
+
+// })
 
 $.get(myCityURL5, function(response) {
     console.log(response);
