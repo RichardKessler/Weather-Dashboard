@@ -4,15 +4,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Weather Search Dashboard</title>
 </head>
 
 <body>
 
-    <div class="imgDiv"></div>
+    <header>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Weather Dashboard</h1>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group input-group-lg">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-lg">City Name</span>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="Raleigh">
+                </div>
+                <button type="button" class="btn btn-primary btn-lg">Search Now</button>
+                <div id="results">SF</div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="currentForecast">
+                    <div id="city">City</div>
+                    <div id="condition">Condition</div>
+                    <div id="weatherIcon">wI</div>
+                    <div id="temp">Temp</div>
+                    <div id="humidity">Humidity</div>
+                    <div id="windSpeed">Speed</div>
+                    <div id="uvIndex">Index</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" id="row2">
+        <div class="col-md-2">
+            <div class="card">
+                <div class="card-body">
+                    <div id="city1" class="card-title">Day 1</div>
+                    <div id="con1" class="card-subtitle mb-2">Condition</div>
+                    <div id="icon1"></div>
+                    <div id="temp1"></div>
+                    <div id="humid1"></div>
+                    <div id="wind1"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="card">
+                <div class="card-body">
+                    <div id="city1" class="card-title">Day 2</div>
+                    <div id="con2" class="card-subtitle mb-2">Condition</div>
+                    <div id="icon2"></div>
+                    <div id="temp2"></div>
+                    <div id="humid2"></div>
+                    <div id="wind2"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="card">
+                <div class="card-body">
+                    <div id="city1" class="card-title">Day 3</div>
+                    <div id="con3" class="card-subtitle mb-2">Condition</div>
+                    <div id="icon3"></div>
+                    <div id="temp3"></div>
+                    <div id="humid3"></div>
+                    <div id="wind3"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="card">
+                <div class="card-body">
+                    <div id="city1" class="card-title">Day 4</div>
+                    <div id="con4" class="card-subtitle mb-2">Condition</div>
+                    <div id="icon4"></div>
+                    <div id="temp4"></div>
+                    <div id="humid4"></div>
+                    <div id="wind4"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="card">
+                <div class="card-body">
+                    <div id="city1" class="card-title">Day 5</div>
+                    <div id="con5" class="card-subtitle mb-2">Condition</div>
+                    <div id="icon5"></div>
+                    <div id="temp5"></div>
+                    <div id="humid5"></div>
+                    <div id="wind5"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="./script.js" type="text/javascript">
     </script>
 </body>
