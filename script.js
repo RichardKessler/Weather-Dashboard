@@ -4,16 +4,21 @@ const myAPIKey = 'f3a53b113ee3edc1f98df25664c9486a';
 
 var myCityURL5 = 'https://api.openweathermap.org/data/2.5/forecast?q=San+Francisco&appid=f3a53b113ee3edc1f98df25664c9486a';
 
-var uvIndex = 'https://api.openweathermap.org/data/2.5/uvi?appid=f3a53b113ee3edc1f98df25664c9486a&lat=37.7749&lon=-122.4194';
+
 
 var myWeatherData = ['', '', '', ];
 
 $(".btn").click(function(event) {
     var myCity = $("#cityInput").val();
     console.log("myCity", myCity);
-
-    var myCurrentCityURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + myCity + '&appid=f3a53b113ee3edc1f98df25664c9486a';
     event.preventDefault();
+    currentWeather(myCity);
+
+})
+
+function currentWeather(myCity) {
+    var myCurrentCityURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + myCity + '&appid=f3a53b113ee3edc1f98df25664c9486a';
+
 
     $.ajax({
             url: myCurrentCityURL,
@@ -28,14 +33,16 @@ $(".btn").click(function(event) {
             $("#temp").html("<h2> Temp: " + tempF.toFixed(2) + " F</h2>");
             $("#humidity").html("<h2> Humidity: " + response.main.humidity + "</h2>");
             $("#windSpeed").html("<h2> Wind Speed: " + response.wind.speed + "</h2>");
+
+            getUV(response.coord.lat, response.coord.lon);
             console.log(response);
+
+
         })
-})
+
+}
 
 
-// $.get(myCurrentCityURL, function(response) {
-
-// })
 
 $.get(myCityURL5, function(response) {
     console.log(response);
@@ -52,19 +59,25 @@ $.get(myCityURL5, function(response) {
     }
 })
 
-$.get(uvIndex, function(response) {
-    $("#uvIndex").html("<h2> UV Index: " + response.value + "</h2>");
-    console.log("My UV Index is ", response.value);
+function getUV(myLat, myLon) {
+    var uvIndex = 'https://api.openweathermap.org/data/2.5/uvi?appid=f3a53b113ee3edc1f98df25664c9486a&lat=' + myLat + '&lon=' + myLon;
+    console.log("getUV -> uvIndex", uvIndex)
 
-    if (response.value <= 2) {
-        $("#uvIndex").css({ "background-color": "green", "color": "snow" });
-    } else if (response.value <= 5) {
-        $("#uvIndex").css({ "background-color": "yellow", "color": "black" });
-    } else if (response.value <= 7) {
-        $("#uvIndex").css({ "background-color": "orange", "color": "snow" });
-    } else if (response.value <= 10) {
-        $("#uvIndex").css({ "background-color": "red", "color": "snow" });
-    } else {
-        $("#uvIndex").css({ "background-color": "purple", "color": "snow" });
-    };
-})
+    $.get(uvIndex, function(response) {
+        $("#uvIndex").html("<h2> UV Index: " + response.value + "</h2>");
+        console.log("My UV Index is ", response.value);
+
+        if (response.value <= 2) {
+            $("#uvIndex").css({ "background-color": "green", "color": "snow" });
+        } else if (response.value <= 5) {
+            $("#uvIndex").css({ "background-color": "yellow", "color": "black" });
+        } else if (response.value <= 7) {
+            $("#uvIndex").css({ "background-color": "orange", "color": "snow" });
+        } else if (response.value <= 10) {
+            $("#uvIndex").css({ "background-color": "red", "color": "snow" });
+        } else {
+            $("#uvIndex").css({ "background-color": "purple", "color": "snow" });
+        };
+    })
+
+}
