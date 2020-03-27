@@ -1,8 +1,8 @@
 const myAPIKey = 'f3a53b113ee3edc1f98df25664c9486a';
-// var myCity = $('#cityInput').val();
+
 var time = moment();
 
-
+savedSerach();
 
 
 var myWeatherData = ['', '', '', ];
@@ -13,8 +13,16 @@ $(".btn").click(function(event) {
     event.preventDefault();
     currentWeather(myCity);
     futureForecast(myCity);
+    recentSearch(myCity);
 })
 
+$(".btn-success").click(function(event) {
+    event.preventDefault();
+    currentWeather(pastSearch);
+    futureForecast(pastSearch);
+})
+
+//function to get the current weather conditions
 function currentWeather(myCity) {
     var myCurrentCityURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + myCity + '&appid=f3a53b113ee3edc1f98df25664c9486a';
 
@@ -25,8 +33,7 @@ function currentWeather(myCity) {
         })
         .then(function(response) {
 
-            // var time = response.dt;
-            // console.log("currentWeather -> time", time)
+            //temp conversion to Fahrenheit
             var tempF = (response.main.temp - 273.15) * 1.80 + 32;
             var myCurrentImage = response.weather[0].icon;
             var myCurrentURL = "<img src='http://openweathermap.org/img/wn/" + myCurrentImage + "@2x.png' />";
@@ -47,6 +54,7 @@ function currentWeather(myCity) {
 
 }
 
+//function for a 5 day forecast
 function futureForecast(myCity) {
     var myCityURL5 = 'https://api.openweathermap.org/data/2.5/forecast?q=' + myCity + '&appid=f3a53b113ee3edc1f98df25664c9486a';
 
@@ -61,10 +69,6 @@ function futureForecast(myCity) {
 
             var myPulledDate = response.list[i].dt_txt.substring(0, 10);
             myMomentDate = moment(myPulledDate).format("MM/DD/YYYY");
-
-            // var myImage = response.list[i].weather[0].icon;
-            // var myURL = "<img src='http://openweathermap.org/img/wn/" + response.list[0].icon + "@2x.png' />";
-            // console.log("myURL", myURL)
 
             $("#date1").html(response.list[8].dt_txt);
             $("#date2").html(response.list[16].dt_txt);
@@ -110,7 +114,7 @@ function futureForecast(myCity) {
 }
 
 
-
+//function to get the UV Index for the searched location
 function getUV(myLat, myLon) {
     var uvIndex = 'https://api.openweathermap.org/data/2.5/uvi?appid=f3a53b113ee3edc1f98df25664c9486a&lat=' + myLat + '&lon=' + myLon;
     // console.log("getUV -> uvIndex", uvIndex)
@@ -130,6 +134,30 @@ function getUV(myLat, myLon) {
         } else {
             $("#uvIndex").css({ "background-color": "purple", "color": "snow" });
         };
+    })
+
+}
+
+// function to saved recent searches to localstorage and add a button for past searches
+function recentSearch(myCity) {
+    localStorage.setItem('city', JSON.stringify(myCity))
+
+    $("#results").prepend("<button type='button' class='btn btn-success btn-lg'>" + myCity + "</button>");
+
+}
+
+function savedSerach() {
+    var pastSearch = JSON.parse(localStorage.getItem('city'));
+
+    if (pastSearch) {
+
+        $("#results").prepend("<button type='button' class='btn btn-success btn-lg'>" + pastSearch + "</button>");
+    };
+
+    $(".btn-success").click(function(event) {
+        event.preventDefault();
+        currentWeather(pastSearch);
+        futureForecast(pastSearch);
     })
 
 }
