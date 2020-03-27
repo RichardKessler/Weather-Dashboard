@@ -67,14 +67,14 @@ function futureForecast(myCity) {
         for (var i = 0; i < 40; i += 8) {
             console.log(response.list[i].dt_txt, response.list[i].wind.speed, response.list[i].main.humidity, response.city.coord.lat, response.city.coord.lon, response.list[i].weather[0].icon);
 
-            var myPulledDate = response.list[i].dt_txt.substring(0, 10);
-            myMomentDate = moment(myPulledDate).format("MM/DD/YYYY");
+            // var myPulledDate = response.list[i].dt_txt.substring(0, 10);
+            // myMomentDate = moment(myPulledDate).format("MM/DD/YYYY");
 
-            $("#date1").html(response.list[8].dt_txt);
-            $("#date2").html(response.list[16].dt_txt);
-            $("#date3").html(response.list[24].dt_txt);
-            $("#date4").html(response.list[32].dt_txt);
-            $("#date5").html(response.list[39].dt_txt);
+            $("#date1").html(moment(response.list[8].dt_txt.substring(0, 10)).format("MM/DD/YYYY"));
+            $("#date2").html(moment(response.list[16].dt_txt.substring(0, 10)).format("MM/DD/YYYY"));
+            $("#date3").html(moment(response.list[24].dt_txt.substring(0, 10)).format("MM/DD/YYYY"));
+            $("#date4").html(moment(response.list[32].dt_txt.substring(0, 10)).format("MM/DD/YYYY"));
+            $("#date5").html(moment(response.list[39].dt_txt.substring(0, 10)).format("MM/DD/YYYY"));
 
             $("#con1").html(response.list[8].weather[0].description);
             $("#con2").html(response.list[16].weather[0].description);
