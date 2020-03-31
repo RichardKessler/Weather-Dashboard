@@ -29,4 +29,15 @@ The data displayed in the forecast window includes the name of the city, the dat
 * HTML/CSS/JS
 * JQuery
 * OpenWeatherMap API
+* Moment.js
 * Github
+
+## Credits 
+
+* Coding Session - Eddie Saunders, Shiva Sharma
+
+## Author
+
+```
+Richard J Kessler
+```
